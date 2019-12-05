@@ -1,16 +1,33 @@
 # mecablr
 MeCab
 
-# 开发方法
+# 开发准备
+## 0. 环境
+- python3
+- pip3
+- MeCab
 
+## 1. Python环境
+### 1.1 创建虚拟环境
+```
+cd app
+python3 -m venv venv
+```
+
+### 1.2 激活虚拟环境
+```shell
+. venv/bin/activate
+```
+
+### 1.3 安装依赖
+```shell
+pip3 install -r requirements.txt 
+```
+
+## 2. MeCab + ipadic-neologd
+
+---
 # 部署方法
-
-## index
-- [requirements](#requirements)
-- [usage](#usage)
-- [with-docker-compose](#with-docker-compose)
-- [[Appendix] Alpine Linux](#alpine-linux)
-
 ## requirements
 - Docker
 
