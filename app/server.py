@@ -3,7 +3,6 @@
 """
 import json
 from os import path
-from typing import Optional
 from flask import Flask, abort, request, Response
 import MeCab
 
@@ -17,28 +16,24 @@ app = Flask(__name__)
 app.config.from_pyfile(CONFIG_PATH)
 
 # MeCab
-mecab = MeCab.Tagger(f"-d {path.join(DIC_DIR, 'mecab-ipadic-neologd')}")
+mecab = MeCab.Tagger()
 
-@app.route('/', methods=['GET', 'POST'])
+
+@app.route('/', methods=['GET'])
 def parse():
     """Morphological Analysis by MeCab.
 
     Request Format:
         GET: /?sentence=アルミ缶の上にあるみかん
-        POST: / -X "Content-Type: application/json"
-            { "sentence": "アルミ缶の上にあるみかん" }
     """
     # STEP.1 Extraction of a given sentence
-    sentence: Optional[str] = None
+    sentence = ""
     try:
-        if request.method == 'POST':
-            sentence = request.json['sentence']
-        else:
-            sentence = request.args['sentence']
+        sentence = request.args['sentence']
     except KeyError:
         abort(400, '`sentence` not found.')
     # STEP.2 Morphological Analysis
-    result: Optional[str] = None
+    result = None
     if sentence is not None:
         parsed = mecab.parse(sentence)
         result = []
