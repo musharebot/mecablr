@@ -1,6 +1,10 @@
 # mecablr
 MeCab
 
+# 开发方法
+
+# 部署方法
+
 ## index
 - [requirements](#requirements)
 - [usage](#usage)
