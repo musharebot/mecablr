@@ -79,14 +79,7 @@ $ curl "127.0.0.1:3193" \
 上記の例を利用して説明します。
 
 ```json
-{
-    "sentence": "Pythonの勉強",
-    "result": [
-        {"Surface": "Python", "PoS": "名詞", "PoS1": "固有名詞", "PoS2": "一般", "PoS3": "*", "VerbConjugation": "*", "Original": "*", "Reading": "Python", "Pronunciation": "パイソン"},
-        {"Surface": "の", "PoS": "助詞", "PoS1": "連体化", "PoS2": "*", "PoS3": "*", "VerbConjugation": "*", "Original": "*", "Reading": "の", "Pronunciation": "ノ"},
-        {"Surface": "勉強", "PoS": "名詞", "PoS1": "サ変接続", "PoS2": "*", "PoS3": "*", "VerbConjugation": "*", "Original": "*", "Reading": "勉強", "Pronunciation": "ベンキョウ"}
-    ]
-}
+
 ```
 
 ## with docker-compose
