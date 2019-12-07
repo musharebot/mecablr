@@ -11,8 +11,11 @@ MeCab
 ### 1.1 MeCab install
 https://github.com/neologd/mecab-ipadic-neologd
 
+- mecab
+- mecab-ipadic
+- swig(required by mecab-python3)
 ```
-brew install mecab mecab-ipadic git curl xz
+brew install mecab mecab-ipadic swig git curl xz
 ```
 
 ## 2. Python环境
