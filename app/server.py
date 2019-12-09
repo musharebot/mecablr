@@ -2,24 +2,39 @@
 """Flask Application
 """
 import json
-from os import path
-from flask import Flask, abort, request, Response
 import MeCab
-
+from os import path
+from flask import Flask, abort, request, Response, render_template
+from flask_bootstrap import Bootstrap
 
 CONFIG_PATH = path.join(path.dirname(path.abspath(__file__)), 'flask.cfg')
 DIC_DIR = path.join('/', 'usr', 'local', 'lib', 'mecab', 'dic')
 
-
 # Flask Application
 app = Flask(__name__)
 app.config.from_pyfile(CONFIG_PATH)
+bootstrap = Bootstrap(app)
 
 # MeCab
 mecab = MeCab.Tagger()
 
 
-@app.route('/', methods=['GET'])
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('500.html'), 500
+
+
+@app.route('/analysis', methods=['GET'])
 def parse():
     """Morphological Analysis by MeCab.
 
