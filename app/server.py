@@ -5,7 +5,8 @@ import json
 from os import path
 from flask import Flask, abort, request, Response, render_template
 from flask_bootstrap import Bootstrap
-from main import mecab_utils
+from .myforms import TextForm
+from .main import mecab_utils
 
 CONFIG_PATH = path.join(path.dirname(path.abspath(__file__)), 'flask.cfg')
 DIC_DIR = path.join('/', 'usr', 'local', 'lib', 'mecab', 'dic')
