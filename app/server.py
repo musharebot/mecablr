@@ -6,6 +6,7 @@ import MeCab
 from os import path
 from flask import Flask, abort, request, Response, render_template
 from flask_bootstrap import Bootstrap
+from . forms import TextForm
 
 CONFIG_PATH = path.join(path.dirname(path.abspath(__file__)), 'flask.cfg')
 DIC_DIR = path.join('/', 'usr', 'local', 'lib', 'mecab', 'dic')
@@ -21,7 +22,12 @@ mecab = MeCab.Tagger()
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    name = None
+    form = TextForm()
+    if form.validate_on_submit():
+        name = form.name.data
+        form.name.data = ''
+    return render_template('index.html', form=form, name=name)
 
 
 @app.errorhandler(404)
