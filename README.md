@@ -7,24 +7,33 @@ MeCab
 - pip3
 - MeCab
 
-## 1. Python环境
-### 1.1 创建虚拟环境
+## 1. MeCab + ipadic-neologd
+### 1.1 MeCab install
+https://github.com/neologd/mecab-ipadic-neologd
+
+- mecab
+- mecab-ipadic
+- swig(required by mecab-python3)
+```
+brew install mecab mecab-ipadic swig git curl xz
+```
+
+## 2. Python环境
+### 2.1 创建虚拟环境
 ```
 cd app
 python3 -m venv venv
 ```
 
-### 1.2 激活虚拟环境
+### 2.2 激活虚拟环境
 ```shell
 . venv/bin/activate
 ```
 
-### 1.3 安装依赖
+### 2.3 安装依赖
 ```shell
 pip3 install -r requirements.txt 
 ```
-
-## 2. MeCab + ipadic-neologd
 
 ---
 # 部署方法
@@ -70,14 +79,7 @@ $ curl "127.0.0.1:3193" \
 上記の例を利用して説明します。
 
 ```json
-{
-    "sentence": "Pythonの勉強",
-    "result": [
-        {"Surface": "Python", "PoS": "名詞", "PoS1": "固有名詞", "PoS2": "一般", "PoS3": "*", "VerbConjugation": "*", "Original": "*", "Reading": "Python", "Pronunciation": "パイソン"},
-        {"Surface": "の", "PoS": "助詞", "PoS1": "連体化", "PoS2": "*", "PoS3": "*", "VerbConjugation": "*", "Original": "*", "Reading": "の", "Pronunciation": "ノ"},
-        {"Surface": "勉強", "PoS": "名詞", "PoS1": "サ変接続", "PoS2": "*", "PoS3": "*", "VerbConjugation": "*", "Original": "*", "Reading": "勉強", "Pronunciation": "ベンキョウ"}
-    ]
-}
+
 ```
 
 ## with docker-compose

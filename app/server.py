@@ -2,11 +2,10 @@
 """Flask Application
 """
 import json
-import MeCab
 from os import path
 from flask import Flask, abort, request, Response, render_template
 from flask_bootstrap import Bootstrap
-from . forms import TextForm
+from main import mecab_utils
 
 CONFIG_PATH = path.join(path.dirname(path.abspath(__file__)), 'flask.cfg')
 DIC_DIR = path.join('/', 'usr', 'local', 'lib', 'mecab', 'dic')
@@ -15,9 +14,6 @@ DIC_DIR = path.join('/', 'usr', 'local', 'lib', 'mecab', 'dic')
 app = Flask(__name__)
 app.config.from_pyfile(CONFIG_PATH)
 bootstrap = Bootstrap(app)
-
-# MeCab
-mecab = MeCab.Tagger()
 
 
 @app.route('/')
@@ -56,18 +52,11 @@ def parse():
     # STEP.2 Morphological Analysis
     result = None
     if sentence is not None:
-        parsed = mecab.parse(sentence)
-        result = []
-        for line in parsed.split('\n'):
-            line = line.strip()
-            elems = line.split('\t', 1)
-            if line == 'EOS' or len(elems) <= 1:
-                continue
-            cols = ['Surface', 'PoS', 'PoS1', 'PoS2', 'PoS3',
-                    'VerbConjugation', 'Original', 'Reading', 'Pronunciation']
-            result.append(dict(zip(cols, [elems[0]] + elems[1].split(','))))
+        # sentence = normalize(sentence)
+        result = mecab_utils.parse_sentence(sentence, nbest_num=1)
+
     # STEP.3 Make a response object
-    payload = json.dumps({'sentence': sentence, 'result': result}, ensure_ascii=False)
+    payload = json.dumps(result, ensure_ascii=False)
     res = {
         'response': payload,
         'status': 200,
